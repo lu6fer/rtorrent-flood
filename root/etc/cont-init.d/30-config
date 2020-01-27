@@ -1,6 +1,4 @@
 #!/usr/bin/with-contenv bash
-set -x
-
 
 # Make directory
 mkdir -p /config/{log,.sessions} \

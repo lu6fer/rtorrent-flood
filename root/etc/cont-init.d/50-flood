@@ -1,6 +1,4 @@
 #!/usr/bin/with-contenv bash
-set -x
-
 
 export FLOOD_PORT=${FLOOD_PORT:-"3000"}
 export FLOOD_SECRET=${FLOOD_SECRET:-"secret"}
