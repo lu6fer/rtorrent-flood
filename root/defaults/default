@@ -1,0 +1,22 @@
+server {
+    listen 80 default_server;
+
+    root /app/rutorrent;
+    index index.php index.html index.htm;
+
+    server_name _;
+
+    client_max_body_size 0;
+    
+    location / {
+      proxy_pass http://127.0.0.1:3000;
+    }
+
+    location ^~ /RPC2 {
+        access_log /config/log/nginx/rtorrent.rpc2.access.log;
+        error_log /config/log/nginx/rtorrent.rpc2.error.log;
+        include /etc/nginx/scgi_params;
+        scgi_pass unix:/config/.sessions/rtorrent.sock;
+        scgi_param    SCRIPT_NAME  /RPC2;
+    }
+}

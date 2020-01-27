@@ -1,4 +1,4 @@
-FROM lsiobase/alpine
+FROM lsiobase/nginx:3.10
 
 ENV FLOOD_SECRET=secret \
     RTORRENT_PORT="49184-49184" \
@@ -23,10 +23,11 @@ RUN apk add --no-cache --upgrade \
     npm install && \
     cp /app/flood/config.docker.js /app/flood/config.js && \
     npm run build && \
+    chown -R abc:abc /app/flood && \
     apk del devdep
 
 COPY root /
 
-EXPOSE 3000 5000 49184 49184/udp
+EXPOSE 80 49184 49184/udp
 
 VOLUME /config /downloads

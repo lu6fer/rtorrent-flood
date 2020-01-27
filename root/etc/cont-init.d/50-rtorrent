@@ -1,14 +1,13 @@
 #!/usr/bin/with-contenv bash
 
-export RTORRENT_PORT=${RTORRENT_PORT:-"49184-49184"}
-export RTORRENT_SCGI_PORT=${RTORRENT_SCGI_PORT:-"5000"}
-export RTORRENT_SCGI_HOST=${RTORRENT_SCGI_HOST:-"localhost"}
-export RTORRENT_SOCK_PATH=${RTORRENT_SOCK_PATH:-"/config/.sessions/rtorrent.sock"}
-export RTORRENT_SOCK=${RTORRENT_SOCK:-"true"}
+RTORRENT_PORT=${RTORRENT_PORT:-"49184-49184"}
+RTORRENT_SOCK_PATH=${RTORRENT_SOCK_PATH:-"/config/.sessions/rtorrent.sock"}
+RTORRENT_SOCK=${RTORRENT_SOCK:-"true"}
 
 if [ $RTORRENT_SOCK == "true" ]; then
   sed -e "s#.*open_local.*\|.*.open_port.*#network.scgi.open_local = ${RTORRENT_SOCK_PATH}#" -i /config/rtorrent.rc
 else
-  sed -e "s#.*open_local.*\|.*.open_port.*#network.scgi.open_port = ${RTORRENT_SCGI_HOST}:${RTORRENT_SCGI_PORT}#" -i /config/rtorrent.rc
+  sed -e "s#.*open_local.*\|.*.open_port.*#network.scgi.open_port = localhost:5000#" -i /config/rtorrent.rc
 fi
 
+sed -e "s#network.port_range.set.*#network.port_range.set = ${RTORRENT_PORT}#" -i /config/rtorrent.rc

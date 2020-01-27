@@ -3,10 +3,11 @@
 Flood is a modern rtorrent client 
 ![FLOOD UI](https://github.com/Flood-UI/flood/raw/master/flood.png)
 
+## Credits
+image based on linuxserver.io/nginx-alpine base image
 
 ## Usage
 
-StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible **offline!**
 
 ### docker
 
@@ -15,8 +16,7 @@ docker run -d \
   --name torrent \
   -v <path/to/downloads>:/downloads \
   -v <path/to/config>:/config \
-  -p 3000:3000 \
-  -p 5000:5000 \
+  -p 80:80 \
   -p 49184:49184 \
   -p 49184:49184/udp \
   -e PUID=1000 \
@@ -40,8 +40,7 @@ services:
       - <path/to/downloads>:/config
       - <path/to/config>:/downloads
     ports:
-      - 3000:3000
-      - 5000:5000
+      - 80:80
       - 49184:49184
       - 49184:49184/udp
     restart: unless-stopped
@@ -51,21 +50,22 @@ services:
 
 | Parameter | Function |
 |:--:|--|
-| `-p 3000` | flood ui port |
-| `-p 5000` | scgi port if `RTORRENT_SOCK=false` |
+| `-p 80` | Web port (flood and rpc) port |
 | `-p 49184` | Bit-torrent port |
 | `-p 49184/udp` | Bit-torrent port |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e FLOOD_SECRET=secret` | Flood secret token **required** |
-| `-e RTORRENT_SOCKER=true` | using socket file or scgi port for rtorrent communication |
 | `-e RTORRENT_PORT="49184-49184"` | Bit-torrent port change port mapping |
-| `-e RTORRENT_SCGI_PORT=5000` | scgi port to use |
-| `-e RTORRENT_SCGI_HOST=localhost` | scgi host |
+| `-e RTORRENT_SOCK=true` | using socket file or scgi port for rtorrent communication |
 | `-e RTORRENT_SOCK_PATH=/config/.sessions/rtorrent.sock` | where the socket is located if `RTORRENT_SOCK=true` |
+| `-e WEBSERVER_PORT=80` | scgi port to use |
 
+## Service
+The flood UI is accessible via ```http://<ip-address>```
+The rtorrent RPC is accessible via ```http://<ip-address>/RPC2```
 
-
+You must configure a reverse proxy (apache, nginx, traefik...) to protect access to RPC2 endpoint.
 
 ## User / Group Identifiers
 
