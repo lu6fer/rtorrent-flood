@@ -16,8 +16,9 @@ mkdir -p /config/{log,.sessions} \
   rm -f /config/.sessions/.rtorrent.lock
 
 # NPM
-mkdir /data/.npm
-npm config set prefix '/data/.npm'
+[[ ! -d /data/.npm ]] && \
+  mkdir /data/.npm && \
+  npm config set prefix '/data/.npm'
 
 
 chown abc:abc \
