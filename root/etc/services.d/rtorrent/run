@@ -1,23 +1,11 @@
 #!/usr/bin/with-contenv bash
 
-export RTORRENT_PORT=${RTORRENT_PORT:-"49184-49184"}
-export RTORRENT_SCGI_PORT=${RTORRENT_SCGI_PORT:-"5000"}
-export RTORRENT_SCGI_HOST=${RTORRENT_SCGI_HOST:-"localhost"}
-export RTORRENT_SOCK_PATH=${RTORRENT_SOCK_PATH:-"/config/.sessions/rtorrent.sock"}
-export RTORRENT_SOCK=${ROTRRENT_SOCK:-"true"}
-
 _term() {
   echo "Caught SIGTERM signal!"
   killall -TERM rtorrent 2>/dev/null
 }
 
 trap _term SIGTERM
-
-if [ $RTORRENT_SOCK == "true" ]; then
-  sed -e "s#.*open_local.*\|.*.open_port.*#network.scgi.open_local = ${RTORRENT_SOCK_PATH}#" -i /config/rtorrent.rc
-else
-  sed -e "s#.*open_local.*\|.*.open_port.*#network.scgi.open_port = ${RTORRENT_SCGI_HOST}:${RTORRENT_SCGI_PORT}#" -i /config/rtorrent.rc
-fi
 
 exec s6-setuidgid abc /usr/bin/rtorrent \
   -n -o import=/config/rtorrent.rc &
