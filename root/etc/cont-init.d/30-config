@@ -1,0 +1,31 @@
+#!/usr/bin/with-contenv bash
+set -x
+
+
+# Make directory
+mkdir -p /config/{log,.sessions} \
+        /downloads/.watch \
+        /data
+
+# Copy config
+[[ ! -e /config/rtorrent.rc ]] && \
+  cp /defaults/rtorrent.rc /config
+
+# Delete lock file
+[[ -e /config/.sessions/rtorrent.lock ]] && \
+  rm -f /config/.sessions/.rtorrent.lock
+
+# NPM
+mkdir /data/.npm
+npm config set prefix '/data/.npm'
+
+
+chown abc:abc \
+  /downloads \
+  /downloads/.watch && \
+chown -R abc:abc \
+  /config \
+  /data \
+  /run \
+  /app/flood
+

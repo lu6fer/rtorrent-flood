@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+set -x
+
+
+export FLOOD_PORT=${FLOOD_PORT:-"3000"}
+export FLOOD_SECRET=${FLOOD_SECRET:-"secret"}
+export RTORRENT_SCGI_PORT=${RTORRENT_SCGI_PORT:-"5000"}
+export RTORRENT_SCGI_HOST=${RTORRENT_SCGI_HOST:-"localhost"}
+export RTORRENT_SOCK_PATH=${RTORRENT_SOCK_PATH:-"/config/.sessions/rtorrent.sock"}
+export RTORRENT_SOCK=${ROTRRENT_SOCK:-"true"}
+
+[[ ! -e /data/server/db/users.db ]] && \
+  mkdir -p /data/server/db && \
+  touch /data/server/db/users.db
+
+chown -R abc:abc /data
+
+sed -e "s#floodServerPort:.*#floodServerPort: ${FLOOD_PORT},#" -i /app/flood/config.js
