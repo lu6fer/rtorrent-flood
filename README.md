@@ -6,6 +6,12 @@ Flood is a modern rtorrent client
 ## Credits
 image based on linuxserver.io/nginx-alpine base image
 
+## Build
+Clone repository 
+``` glit clone https://github.com/lu6fer/rtorrent-flood```
+Build image
+``` cd rtorrent-flood && docker build . -t rtorrent-flood```
+
 ## Usage
 
 
@@ -22,6 +28,8 @@ docker run -d \
   -e PUID=1000 \
   -e PGID=1000 \
   -e FLOOD_SECRET="floodsecret" \
+  -e RPC_USER="admin" \
+  -e RPC_PASSWORD="rtorrentadmin" \
   --restart unless-stopped \
   rtorrent-flood:latest
   ```
@@ -36,6 +44,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - FLOOD_SECRET="floodsecret"
+      - RPC_USER="admin"
+      - rpc_PASSWORD="rtorrentadmin"
     volumes:
       - <path/to/downloads>:/config
       - <path/to/config>:/downloads
@@ -60,12 +71,12 @@ services:
 | `-e RTORRENT_SOCK=true` | using socket file or scgi port for rtorrent communication |
 | `-e RTORRENT_SOCK_PATH=/config/.sessions/rtorrent.sock` | where the socket is located if `RTORRENT_SOCK=true` |
 | `-e WEBSERVER_PORT=80` | scgi port to use |
+| `-e RPC_USER="admin"` | User name for rtorrent XML-RPC connection  |
+| `-e RPC_PASSWORD="rtorrentadmin"` | Password for rtorrent XML-RPC connection |
 
 ## Service
 The flood UI is accessible via ```http://<ip-address>```
 The rtorrent RPC is accessible via ```http://<ip-address>/RPC2```
-
-You must configure a reverse proxy (apache, nginx, traefik...) to protect access to RPC2 endpoint.
 
 ## User / Group Identifiers
 

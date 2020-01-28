@@ -1,9 +1,10 @@
 FROM lsiobase/nginx:3.10
 
-ENV FLOOD_SECRET=secret \
+ENV WEBSERVER_PORT="80" \
+    FLOOD_SECRET="secret" \
+    RPC_USER="admin" \
+    RPC_PASSWORD="rtorrentadmin" \
     RTORRENT_PORT="49184-49184" \
-    RTORRENT_SCGI_PORT="5000" \
-    RTORRENT_SCGI_HOST="localhost" \
     RTORRENT_SOCK_PATH="/config/.sessions/rtorrent.sock" \
     RTORRENT_SOCK="true"
 

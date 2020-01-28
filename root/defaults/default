@@ -1,7 +1,7 @@
 server {
     listen 80 default_server;
 
-    root /app/rutorrent;
+    root /app/flood;
     index index.php index.html index.htm;
 
     server_name _;
@@ -13,6 +13,8 @@ server {
     }
 
     location ^~ /RPC2 {
+        auth_basic "Authentication needed";
+        auth_basic_user_file /config/nginx/.htpasswd;
         access_log /config/log/nginx/rtorrent.rpc2.access.log;
         error_log /config/log/nginx/rtorrent.rpc2.error.log;
         include /etc/nginx/scgi_params;

@@ -3,10 +3,19 @@
 RTORRENT_SOCK_PATH=${RTORRENT_SOCK_PATH:-"/config/.sessions/rtorrent.sock"}
 RTORRENT_SOCK=${RTORRENT_SOCK:-"true"}
 WEBSERVER_PORT=${WEBSERVER_PORT:-80}
+RPC_USER=${RPC_USER:-"admin"}
+RPC_PASSWORD=${RPC_PASSWORD:-"rtorrentadmin"}
+
+[[ ! -e /config/nginx/.htpasswd ]] && \
+  touch /config/nginx/.htpasswd
+
+[[ ! `grep ${RPC_USER} /config/nginx/.htpasswd` ]] &&
+  htpasswd -b /config/nginx/.htpasswd ${RPC_USER} ${RPC_PASSWORD} &&
+  echo "************ XMLRPC user/password : ${RPC_USER} / ${RPC_PASSWORD}"
 
 if [ $RTORRENT_SOCK == "true" ]; then
-  sed -e "s#server unix.*\|server localhost.*#server unix:${RTORRENT_SOCK_PATH};#" -i /config/nginx/site-confs/default
+  sed -e "s#scgi_pass unix.*\|scgi_pass localhost.*#scgi_pass unix:${RTORRENT_SOCK_PATH};#" -i /config/nginx/site-confs/default
 else
-  sed -e "s#server unix\|server localhost.*#server localhost:5000;#" -i /config/nginx/site-confs/default
+  sed -e "s#scgi_pass unix\|scgi_pass localhost.*#scgi_pass localhost:5000;#" -i /config/nginx/site-confs/default
 fi
 sed -e "s#listen\ .*#listen ${WEBSERVER_PORT} default_server;#" -i /config/nginx/site-confs/default

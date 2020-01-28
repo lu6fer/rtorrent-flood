@@ -4,8 +4,12 @@ export FLOOD_SECRET=${FLOOD_SECRET:-"secret"}
 RTORRENT_SOCK_PATH=${RTORRENT_SOCK_PATH:-"/config/.sessions/rtorrent.sock"}
 RTORRENT_SOCK=${RTORRENT_SOCK:-"true"}
 
-[[ ! -e /data/server/db/users.db ]] && \
-  mkdir -p /data/server/db && \
-  touch /data/server/db/users.db
+mv /app/flood/config.js /config/flood/config.js && \
+  ln -fs /config/flood/config.js /app/flood/config.js
+sed -e "s#dbPath: .*#dbPath: '/config/flood',#" -i /app/flood/config.js
+
+#[[ ! -e /data/server/db/users.db ]] && \
+  #mkdir -p /data/server/db && \
+  #touch /data/server/db/users.db
 
 chown -R abc:abc /data
