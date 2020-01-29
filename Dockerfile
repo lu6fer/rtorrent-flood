@@ -1,4 +1,4 @@
-FROM lsiobase/nginx:3.10
+FROM lsiobase/nginx:3.11
 
 ENV WEBSERVER_PORT="80" \
     FLOOD_SECRET="secret" \
