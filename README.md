@@ -56,6 +56,8 @@ services:
       - 49184:49184/udp
     restart: unless-stopped
 ```
+**Warning**
+Startup me take a while, changing user:group to flood's node_module take some time. Be patient, the container will be up :)
 
 ## Parameters
 

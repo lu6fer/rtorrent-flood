@@ -29,6 +29,9 @@ RUN apk add --no-cache --upgrade \
 
 COPY root /
 
+LABEL maintainer="lu6fer"
+LABEL project_url="https://github.com/lu6fer/rtorrent-flood"
+
 EXPOSE 80 49184 49184/udp
 
 VOLUME /config /downloads
