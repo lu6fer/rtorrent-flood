@@ -1,7 +1,7 @@
 # rtorrent-flood
 
 Flood is a modern rtorrent client 
-![FLOOD UI](https://github.com/Flood-UI/flood/raw/master/flood.png)
+<img alt="Flood UI" align="right" width="100" height="100" src="https://github.com/lu6fer/rtorrent-flood" />
 
 ## Credits
 image based on linuxserver.io/nginx-alpine base image
@@ -78,7 +78,12 @@ Startup me take a while, changing user:group to flood's node_module take some ti
 
 ## Flood
 First login to Flood will ask you to create an account.
-Configure your user name and your password, then select ```Unix socket``` as rTorrent connexion type and put ```/config/.sessions/rtorrent.sock``` in rTorrent Socket field
+Configure your user name and your password,
+then select ```Unix socket``` as rTorrent connexion type and put ```/config/.sessions/rtorrent.sock``` in rTorrent Socket field
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/lu6fer/rtorrent-flood/master/docs/flood_config.png" />
+</p>
 
 ## Service
 The flood UI is accessible via ```http://<ip-address>```
