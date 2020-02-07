@@ -31,7 +31,7 @@ docker run -d \
   -e RPC_USER="admin" \
   -e RPC_PASSWORD="rtorrentadmin" \
   --restart unless-stopped \
-  lu6fer/rtorrent-flood:latest
+  lu6fer/flood-rtorrent:latest
   ```
 ### docker-compose
 ```
@@ -39,7 +39,7 @@ docker run -d \
 version: "2"
 services:
   rtorrent-flood:
-    image: lu6fer/rtorrent-flood
+    image: lu6fer/flood-rtorrent
     container_name: torrent
     environment:
       - PUID=1000
