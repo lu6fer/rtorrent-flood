@@ -1,7 +1,7 @@
 # rtorrent-flood
 
 Flood is a modern rtorrent client 
-<img alt="Flood UI" align="right" width="100" height="100" src="https://github.com/lu6fer/rtorrent-flood" />
+<img alt="Flood UI" align="right" width="100" height="100" src="https://github.com/Flood-UI/flood/raw/master/flood.png" />
 
 ## Credits
 image based on linuxserver.io/nginx-alpine base image
