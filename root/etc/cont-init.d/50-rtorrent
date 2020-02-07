@@ -11,3 +11,5 @@ else
 fi
 
 sed -e "s#network.port_range.set.*#network.port_range.set = ${RTORRENT_PORT}#" -i /config/rtorrent.rc
+
+rm -rf /config/.sessions/rtorrent.*

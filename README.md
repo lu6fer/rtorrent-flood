@@ -31,15 +31,15 @@ docker run -d \
   -e RPC_USER="admin" \
   -e RPC_PASSWORD="rtorrentadmin" \
   --restart unless-stopped \
-  rtorrent-flood:latest
+  lu6fer/rtorrent-flood:latest
   ```
 ### docker-compose
 ```
 ---
 version: "2"
 services:
-  rutorrent:
-    image: linuxserver/rutorrent
+  rtorrent-flood:
+    image: lu6fer/rtorrent-flood
     container_name: torrent
     environment:
       - PUID=1000
@@ -64,8 +64,8 @@ Startup me take a while, changing user:group to flood's node_module take some ti
 | Parameter | Function |
 |:--:|--|
 | `-p 80` | Web port (flood and rpc) port |
-| `-p 49184` | Bit-torrent port |
-| `-p 49184/udp` | Bit-torrent port |
+| `-p 49184` | Bit-torrent port (don't forget to open port on your router) |
+| `-p 49184/udp` | Bit-torrent port (don't forget to open port on your router) |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e FLOOD_SECRET=secret` | Flood secret token **required** |
