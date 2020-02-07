@@ -76,6 +76,10 @@ Startup me take a while, changing user:group to flood's node_module take some ti
 | `-e RPC_USER="admin"` | User name for rtorrent XML-RPC connection  |
 | `-e RPC_PASSWORD="rtorrentadmin"` | Password for rtorrent XML-RPC connection |
 
+## Flood
+First login to Flood will ask you to create an account.
+Configure your user name and your password, then select ```Unix socket``` as rTorrent connexion type and put ```/config/.sessions/rtorrent.sock``` in rTorrent Socket field
+
 ## Service
 The flood UI is accessible via ```http://<ip-address>```
 The rtorrent RPC is accessible via ```http://<ip-address>/RPC2```
