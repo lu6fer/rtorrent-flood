@@ -48,8 +48,8 @@ services:
       - RPC_USER="admin"
       - rpc_PASSWORD="rtorrentadmin"
     volumes:
-      - <path/to/downloads>:/config
-      - <path/to/config>:/downloads
+      - <path/to/downloads>:/downloads
+      - <path/to/config>:/config
     ports:
       - 80:80
       - 49184:49184
