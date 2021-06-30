@@ -19,7 +19,7 @@ RUN apk add --no-cache --upgrade \
       zip && \
     apk add --no-cache --virtual=devdep \
       git && \
-    git clone https://github.com/Flood-UI/flood.git /app/flood && \
+    git clone https://github.com/jesec/flood.git /app/flood && \
     cd /app/flood && \
     npm install && \
     cp /app/flood/config.docker.js /app/flood/config.js && \
