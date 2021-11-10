@@ -1,3 +1,6 @@
+# [Archived]
+The repo is archived, you can find a working image at https://github.com/jesec/flood
+
 # rtorrent-flood
 
 Flood is a modern rtorrent client 
